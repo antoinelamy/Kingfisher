@@ -142,7 +142,7 @@ extension KFImage {
 struct KFImageRenderer: View {
 
     /// An image binder that manages loading and cancelling image related task.
-    @ObservedObject var binder: KFImage.ImageBinder
+    @StateObject var binder: KFImage.ImageBinder
 
     // Acts as a placeholder when loading an image.
     var placeholder: AnyView?
@@ -154,7 +154,7 @@ struct KFImageRenderer: View {
     let configurations: [(Image) -> Image]
 
     init(_ context: KFImage.Context) {
-        self.binder = context.binder
+        self._binder = StateObject(wrappedValue: context.binder)
         self.configurations = context.configurations
         self.placeholder = context.placeholder
         self.cancelOnDisappear = context.cancelOnDisappear
